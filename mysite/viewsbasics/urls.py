@@ -16,4 +16,6 @@ urlpatterns = [
     path('word/<word>/', views.Word.as_view()),
     path('bmi/<weight>/<height>/', views.BMI.as_view()),
     path('calc/<length>/<height>/', views.Calc.as_view())
+    path('admin/', admin.site.urls),
+    path('todo/', include('todo.urls')),
 ]    
