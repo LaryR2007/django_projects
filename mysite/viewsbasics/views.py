@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.utils.html import escape
 from random import choice
-
+from django.views import View
+from django.shortcuts import render
 
 def funktionally(request):
     response = """<!DOCTYPE html>
@@ -189,3 +190,45 @@ def bounce(request):
         'https://www.djangoproject.com/',
     ]
     return HttpResponseRedirect(choice(places))
+
+class Name(View):
+    def get(self,request,name=""):
+        #name = request.GET.get('name')
+        x = {'name':name}
+        return render(request, 'viewsbasics/name.html',x)
+
+class Num(View):
+    def get(self,request,num=""):
+        #num = request.GEt.get('num')
+        x = {'num':num}
+        return render(request, 'viewsbasics/num.html',x)
+
+class Word(View):
+    def get(self,request,word=""):
+        #word = request.GET.get('word')
+        x = {'word':word}
+        return render(request, 'viewsbasics/word.html',x)
+
+class BMI(View):
+    def get(self, request, weight, height):
+        #height = request.GET.get('height')
+        #weight = request.GET.get('weight')
+        weight = int(weight)
+        height = int(height)
+        bmi = round(703*(weight / (height**2)))  # Calculate BMI
+
+        x = {'height':height, 'weight':weight, 'bmi':bmi}
+        return render(request, 'viewsbasics/bmi.html',x)
+
+class Calc(View):
+    def get(self, request, length, height):
+        #length = request.GET.get('length')
+        #height = request.GET.get('height')
+        length = int(length)
+        height = int(height)
+        area = length * height
+        perimeter = 2 * (length + height)
+
+        x = {'length':length, 'height':height, 'area':area, 'perimeter':perimeter}
+        return render(request, 'viewsbasics/calc.html',x)
+
