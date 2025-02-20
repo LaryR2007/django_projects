@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import ItemListView, ItemDetailView
+from . import views
 
+app_name = "todo"
 urlpatterns = [
-    path('', views.ItemList.as_view()),
-    path('<pk>/', views.ItemDetail.as_view()),
+    path('', views.ListView.as_view(), name="index"),
+    path('<int:pk>/', views.DetailView.as_view(), name="detail"),
 ]

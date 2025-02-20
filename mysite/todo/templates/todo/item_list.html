@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>Todo List</h1>
+<main>
+<ul>
+    {% for i  in items %}
+        <li>
+            <a href="{% url 'todo:detail' i.id %}">{{ i.text }}</a>
+        </li>
+    {% endfor %}
+</ul>
+</main>
+{% endblock %}

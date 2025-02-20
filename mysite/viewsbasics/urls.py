@@ -1,6 +1,8 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path, include
 from . import views
 from django.views.generic import TemplateView
+
 
 
 app_name = 'viewsbasics'
@@ -15,7 +17,5 @@ urlpatterns = [
     path('num/<num>/', views.Num.as_view()),
     path('word/<word>/', views.Word.as_view()),
     path('bmi/<weight>/<height>/', views.BMI.as_view()),
-    path('calc/<length>/<height>/', views.Calc.as_view())
-    path('admin/', admin.site.urls),
-    path('todo/', include('todo.urls')),
+    path('calc/<length>/<height>/', views.Calc.as_view()),
 ]    
