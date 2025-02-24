@@ -11,4 +11,5 @@ class DetailView(generic.DetailView):
     model = Detail
     template_name = 'todo/item_detail.html'
 
+
 # Create your views here.
