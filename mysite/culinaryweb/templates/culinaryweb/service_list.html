@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h1>Todo List</h1>
+<h1>Cosmetology Services</h1>
 <main>
 <ul>
-    {% for i  in items %}
+    {% for s in services %}
         <li>
-            <a href="{% url 'culinary:detail' question.id %}">{{ i.text }}</a>
+            <a href="{% url 'culinaryweb:detail' s.id %}">{{ s.text }}</a>
         </li>
     {% endfor %}
 </ul>

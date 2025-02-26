@@ -2,8 +2,12 @@
 
 {% block content %}
 <h1> Have some details </h1>
-<h2>{{ detail.text }}</h2>
-
-<a href="{% url 'culinary:index' service.id %}">Back</a>
-
+<main>
+    <ul>
+        <li>
+            {{ detail.text }}
+        </li>
+    </ul>
+  
+</main>
 {% endblock %}

@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Service, Detail
 
-class ListView(generic.ListView):
+class ServiceIndexView(generic.ListView):
     model = Service
     template_name = 'culinaryweb/service_list.html'
-    context_object_name = 'items'
+    context_object_name = 'services'
 
 class DetailView(generic.DetailView):
     model = Detail
