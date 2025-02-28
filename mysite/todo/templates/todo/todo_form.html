@@ -1,0 +1,10 @@
+{% extends "todo/base.html" %}
+{% block title %}Form{% endblock %}
+{% block h1 %}Form{% endblock %}
+{% block mainstuff %}
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="save">
+</form>
+{% endblock %}

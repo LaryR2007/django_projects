@@ -1,16 +1,10 @@
 from django.db import models
 
-class Item(models.Model):
-    text = models.CharField(max_length=255)
+class ToDo(models.Model):
+    description = models.CharField(max_length=80)
+    due = models.DateField()
 
-    def __str__(self):
-        return self.text
-
-class Detail(models.Model):
-    text = models.CharField(max_length=255)
-    # item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.text
+    def get_absolute_url(self):
+        return "/todo/items"
 
     # Create your models here.

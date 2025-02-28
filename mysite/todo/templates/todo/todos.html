@@ -1,0 +1,17 @@
+{% extends "todo/base.html" %}
+{% block title %}Items List{% endblock %}
+{% block h1 %}Items List{% endblock %}
+{% block mainstuff %}
+{% if todo_list %}
+<ul id="item_list">
+  {% for item in todo_list %}
+  <li><b><a href="{% url 'todo:item' item.id %}">{{ item.description }}</a></b>
+  | [<a href="{% url 'todo:delete_item' item.id %}">delete</a>]
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>There are no todos in the ToDo list.</p>
+{% endif %}
+<h2><a href="{% url 'todo:add_item' %}">Add an Item</a></h2>
+{% endblock %}

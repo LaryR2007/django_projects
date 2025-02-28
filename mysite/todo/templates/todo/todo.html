@@ -1,0 +1,10 @@
+{% extends "todo/base.html" %}
+{% block title %}Item{% endblock %}
+{% block h1 %}Item{% endblock %}
+{% block mainstuff %}
+<h2>{{ todo_item.description }}</h2>
+<p>
+<b>Due</b>: {{ todo_item.due }}
+</p>
+<p><a href="{% url 'todo:items' %}">Return to To Dos List</a></p>
+{% endblock %}
