@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+<h1>Candy List</h1>
+<a href="{% url 'candy_create' %}">Add New Candy</a>
+<ul>
+    {% for candy in candies %}
+        <li>{{ candy.name }}
+            <form action="{% url 'candy_delete' candy.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'description_list' %}">View Candy Descriptions</a>
