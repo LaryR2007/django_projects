@@ -1,0 +1,8 @@
+<h1>Candy Descriptions</h1>
+<a href="{% url 'description_create' %}">Add New Description</a>
+<ul>
+        <li><strong>{{ description.candy.name }}</strong></li>
+        <li>{{ description.flavor }}</li>
+        <li> Ingredients: {{ description.ingredients }}</li>
+</ul>
+<a href="{% url 'candy_list' %}">Back to Candy List</a>

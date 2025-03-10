@@ -1,12 +1,12 @@
 from django import forms
 from .models import Candy, CandyDescription
 
-class CandyForm(forms.Form):
+class CandyForm(forms.ModelForm):
     class Meta: 
-        mode = Candy
+        model = Candy
         fields = ['name']
 
-class CandyDesForm(forms.Form):
+class CandyDescriptionForm(forms.ModelForm):
     class Meta: 
-        mode = CandyDescription
+        model = CandyDescription
         fields = ['candy', 'ingredients', 'flavor']

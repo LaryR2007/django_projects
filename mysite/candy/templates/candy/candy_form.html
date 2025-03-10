@@ -1,9 +1,8 @@
-
 <h1>Add New Candy</h1>
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <label for="id_name">Candy Name:</label>
+    {{ form.name }}  <!-- This correctly renders the form field -->
     <button type="submit">Save</button>
 </form>
 <a href="{% url 'candy_list' %}">Back</a>
-

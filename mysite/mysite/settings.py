@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo.apps.TodoConfig',
-    'culinaryweb.apps.CulinarywebConfig'
+    'culinaryweb.apps.CulinarywebConfig',
+    'candy.apps.CandyConfig'
 ]
 
 MIDDLEWARE = [

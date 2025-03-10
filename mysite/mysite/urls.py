@@ -26,4 +26,5 @@ urlpatterns = [
     path('viewsbasics/', include('viewsbasics.urls')),
     path('dtl/', include('dtl.urls')),
     path('polls/', include('polls.urls')),
+    path('candy/', include ('candy.urls'))
 ]
