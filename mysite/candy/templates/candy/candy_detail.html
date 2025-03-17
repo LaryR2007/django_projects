@@ -1,0 +1,32 @@
+
+<h1>{{ candy.name }}</h1>
+
+<h2>Description</h2>
+{% if descriptions %}
+    <ul>
+    {% for description in descriptions %}
+        <li><strong>Flavor:</strong> {{ description.flavor }}</li>
+        <li><strong>Ingredients:</strong> {{ description.ingredients }}</li>
+        <li><strong>Colors:</strong>  
+            {% for color in description.colors.all %}
+                <a href="{% url 'candies_by_color' color.name %}">{{ color.name }}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+        <hr>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No descriptions available.</p>
+{% endif %}
+
+<!-- Show form if no description exists -->
+{% if not descriptions %}
+    <h2>Add a New Description</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Description</button>
+    </form>
+{% endif %}
+
+<a href="{% url 'candy_list' %}">Back to Candy List</a>

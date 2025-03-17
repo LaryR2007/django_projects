@@ -3,7 +3,7 @@
 <a href="{% url 'candy_create' %}">Add New Candy</a>
 <ul>
     {% for candy in candies %}
-        <li><a href="{% url 'description_list' %}">{{ candy.name }}</a>
+        <li><a href="{% url 'candy_detail' candy.id %}">{{ candy.name }}</a>
             <form action="{% url 'candy_delete' candy.id %}" method="POST" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit">Delete</button>
@@ -11,4 +11,3 @@
         </li>
     {% endfor %}
 </ul>
-<a href="{% url 'description_list' %}">View Candy Descriptions</a>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candy, CandyDescription
+from .models import Candy, CandyDescription, Color
 
 class CandyForm(forms.ModelForm):
     class Meta: 
@@ -7,6 +7,12 @@ class CandyForm(forms.ModelForm):
         fields = ['name']
 
 class CandyDescriptionForm(forms.ModelForm):
-    class Meta: 
+    colors = forms.ModelMultipleChoiceField(
+        queryset=Color.objects.all(),
+        widget=forms.CheckboxSelectMultiple,  # Allows selecting multiple colors
+        required=False
+    )
+
+    class Meta:
         model = CandyDescription
-        fields = ['candy', 'ingredients', 'flavor']
+        fields = ['ingredients', 'flavor', 'colors']

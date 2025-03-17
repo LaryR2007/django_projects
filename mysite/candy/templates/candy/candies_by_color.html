@@ -1,0 +1,9 @@
+<h1>Candies with Color: {{ color.name }}</h1>
+
+<ul>
+    {% for candy in candies %}
+        <li><a href="{% url 'candy_detail' candy.id %}">{{ candy.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'candy_list' %}">Back to Candy List</a>
