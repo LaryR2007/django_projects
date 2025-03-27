@@ -1,7 +1,11 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Candy, CandyDescription, Color
 from .forms import CandyForm, CandyDescriptionForm, Color
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse
 
 
 # List all candies
@@ -9,8 +13,15 @@ def candy_list(request):
         candies = Candy.objects.all()
         return render(request, 'candy/candy_list.html', {'candies': candies})
 
+def candy_detail(LoginRequiredMixin, DetailView):
+    candy = get_object_or_404(Candy, id=candy_id)
+    login_url = '/login/' 
+    return render(request, 'candy/candy_detail.html', {'candy': candy})
+
 # Create a new candy
 def candy_create(request):
+    success_url = reverse('candy_list')
+    login_url = '/login/'
     if request.method == "POST":
 
         form = CandyForm(request.POST)
@@ -34,6 +45,8 @@ def candy_delete(request, pk):
 def candy_detail(request, candy_id):
     candy = get_object_or_404(Candy, id=candy_id)
     descriptions = candy.descriptions.all()
+    success_url = reverse('candy_list')
+    login_url = '/login/'
 
     # Show form only if no description exists
     form = None
