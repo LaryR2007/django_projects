@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Genres</h2>
-    <ul>
-        {% for genre in object_list %}
-            <li><a href="{% url 'books:book-create' %}?genre={{ genre.id }}">{{ genre.name }}</a></li>
-        {% endfor %}
-    </ul>
+<h2>Genres</h2>
+<ul>
+    {% for genre in genres %}
+        <li>
+            <a href="{% url 'books:genre_detail' genre.pk %}">{{ genre.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

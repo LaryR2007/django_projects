@@ -7,13 +7,18 @@ class Genre(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('books:genre_detail', args=[str(self.id)])
 
 class Author(models.Model):
     name = models.CharField(max_length=200)
-    
+
     def __str__(self):
         return self.name
-    
+
+    def get_absolute_url(self):
+        return reverse('books:author_list') 
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
@@ -25,7 +30,7 @@ class Book(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('books:book-detail', args=[str(self.id)])
+        return reverse('books:genre_detail', args=[str(self.id)])
 
 
 # Create your models here.

@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render
 from django.views import generic, View
 from .models import Book, Genre, Author
@@ -6,55 +7,50 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 class GenreListView(LoginRequiredMixin, ListView):
     model = Genre
     template_name = 'books/genre_list.html'
+    context_object_name = 'genres'
 
-class BookListView(LoginRequiredMixin, ListView):
-    model = Book
-    template_name = 'books/book_list.html'
+class GenreDetailView(LoginRequiredMixin, DetailView):
+    model = Genre
+    template_name = 'books/genre_detail.html'
+    context_object_name = 'genre'
 
-class BookDetailView(LoginRequiredMixin, DetailView):
-    model = Book
-    template_name = 'books/book_detail.html'
+class BookCreateForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'author', 'genres']
+
+    author = forms.ModelChoiceField(queryset=Author.objects.all())
+    genres = forms.ModelMultipleChoiceField(queryset=Genre.objects.all())
 
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
-    fields = ['title', 'author', 'genres']
+    form_class = BookCreateForm
     template_name = 'books/book_form.html'
-    
-    def get_initial(self):
-        initial = super().get_initial()
-        genre_id = self.request.GET.get('genre')
-        if genre_id:
-            initial['genres'] = [Genre.objects.get(id=genre_id)]
-        return initial
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user
+        form.instance.owner = self.request.user  # Assign the current user as the owner of the book
         return super().form_valid(form)
-
-class BookUpdateView(LoginRequiredMixin, UpdateView):
-    model = Book
-    fields = ['title', 'author', 'genres']
-    template_name = 'books/book_form.html'
-
-class BookDeleteView(LoginRequiredMixin, DeleteView):
-    model = Book
-    template_name = 'books/book_confirm_delete.html'
-    success_url = '/' # Redirect after delete
 
 class AuthorCreateView(LoginRequiredMixin, CreateView):
     model = Author
     fields = ['name']
     template_name = 'books/author_form.html'
+    success_url = reverse_lazy('books:author_list')  # Redirect to the list of authors after successful creation
 
-class GenreCreateView(LoginRequiredMixin, CreateView):
-    model = Genre
-    fields = ['name']
-    template_name = 'books/genre_form.html'
+    def form_valid(self, form):
+        form.instance.owner = self.request.user  # Set the owner to the current logged-in user
+        return super().form_valid(form)
+    
+class AuthorListView(ListView):
+    model = Author
+    template_name = 'books/author_list.html'
+    context_object_name = 'authors'
 
 class UserLogoutView(LogoutView):
     template_name = 'books/logout.html'
